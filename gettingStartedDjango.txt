@@ -12,7 +12,7 @@ Getting a Django project up and running
     django-admin startproject <project name>
 
 3. In the project create and apps folder
-    > cd main
+    > cd <project name>
     # Make a new apps directorycopy
     > mkdir apps
 4. Once in the apps folder create __init__.py file
@@ -64,6 +64,10 @@ Getting a Django project up and running
         url(r'^$', views.index)     
     ]
 10. Create function in views file.
+11. Migrate
+    # Need to be in same directory as manage.py file
+    > python manage.py makemigrations
+    > python manage.py migrate
 
 
 REGX cheat sheet
