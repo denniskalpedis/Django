@@ -1,0 +1,77 @@
+Getting a Django project up and running
+
+// run Django app with 
+    //python manage.py runserver
+// runs app on localhost:8000
+
+1. start or created your virtual enviroment
+    in enviroments folder
+    source djangoEnv/bin/activate
+
+2. Create your project
+    django-admin startproject <project name>
+
+3. In the project create and apps folder
+    > cd main
+    # Make a new apps directorycopy
+    > mkdir apps
+4. Once in the apps folder create __init__.py file
+    # Navigate into apps
+    > cd apps
+    > touch __init__.py
+5. Create apps
+    > python ../manage.py startapp <app name>
+6. In the settings.py file we need to add our app to the installed apps.
+    # Inside main/settings.py
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+    ]
+    # BECOMES:
+    INSTALLED_APPS = [
+        'apps.<app name>', ### added this line!
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+    ]
+7. Change <project name>/urls.py so it can use routes from our app.
+    # BEFORE
+    from django.conf.urls import url
+    from django.contrib import admin
+    urlpatterns = [
+        url(r'^admin/', admin.site.urls),
+    ]
+    #AFTER
+    from django.conf.urls import url, include # Notice we added include
+    from django.contrib import admin
+    urlpatterns = [
+        url(r'^', include('apps.<app name>.urls')) # And now we use the include function to pull in our <app name>.urls...
+    ]
+8. Now create our apps urls file.
+    > cd apps/<app name>
+    > touch urls.py
+9. Open <app name>/urls.py add routes.
+    from django.conf.urls import url
+    from . import views           
+    urlpatterns = [
+        url(r'^$', views.index)     
+    ]
+10. Create function in views file.
+
+
+REGX cheat sheet
+    '^' Matches the following characters at the beginning of a string. Example: '^a' matches 'anna' but not 'banana'.
+    '$' Matches the previous characters at the end of a string. Example: 'a$' matches 'anna' and 'banana' but not 'fan'.
+    '[]' Matches any value in a range. Example: '[0-9]' matches '9' and '9s'.
+    '{n}' Matches n number or more repetitions of the preceding pattern. Example: '[0-9]{2}' matches '91' and '9834' but not '9'
+    \d Matches digits.  Example: "\d" matches "8" and "877x"
+    \d+ matches a string with one or more digits
+    \w Matches characters.
+    \w+ matches a string with one or more character/word
