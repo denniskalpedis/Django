@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dojo Survey</title>
+</head>
+<body>
+    <p>You have submitted this form {{request.session.count}} times now.</p>
+    <h1>Submitted Info:</h1>
+    <p>name: {{request.session.name}}</p>
+    <p>Dojo Location: {{request.session.dojo}}</p>
+    <p>Favorite Language: {{request.session.language}}</p>
+    <p>Comments: {{request.session.comment}}</p>
+    <button><a href="/">Go Back</a></button>
+</body>
+</html>
