@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <h1>Add a new User</h1>
+    {% if messages%}
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor%}
+    {% endif %}
+    <form action="/users/create" method="POST">
+        {% csrf_token %}
+        First Name: <input type="text" name='f_name'>
+        Last Name: <input type="text" name='l_name'>
+        Email: <input type="text" name='email'>
+        <input type="submit" value="Create">
+    </form>
+    <button><a href="/users">Go Back</a></button>
+</body>
+</html>
