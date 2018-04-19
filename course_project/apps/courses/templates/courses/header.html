@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'courses/styles.css'%}">
+    <title>Courses App</title>
+</head>
+<body>
+<header>
+    <h1>Welcome {{user.first_name}}!</h1>
+    <a href="/logout">Logout</a>
+</header>

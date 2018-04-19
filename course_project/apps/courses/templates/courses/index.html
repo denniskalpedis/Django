@@ -1,0 +1,63 @@
+
+    {% include "courses/header.html" %}
+    {% if messages%}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor%}
+    {% endif %} 
+    <form action="/courses/new" method="POST">
+        {% csrf_token %}
+        Course Name: <input type="text" name='name'>
+        Course Description: <textarea type="text" name='desc'></textarea>
+        <input type="submit" value='Add'>
+    </form>
+    {% if user.courses.all %}
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Course Description</th>
+            <th>Actions</th>
+        </tr>
+        {% for course in user.courses.all %}
+        <tr>
+            <td>{{course.name}}</td>
+            <td>{{course.desc}}</td>
+            <td><a href="{{course.id}}/drop">Drop</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br>
+    {{user.courses.all}}
+    <br>
+    {% if courses %}
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course.name}}</td>
+            <td>{{course.desc}}</td>
+            <td>{{course.created_at}}</td>
+            <td>
+                {% if course.creator.id == request.session.id %}
+                
+                <a href="{{course.id}}/edit">Edit</a>
+                <a href="{{course.id}}/confirm">Delete</a>
+                {% endif %}
+                {% if course not in user.courses.all %}
+                <a href="{{course.id}}/join">Join</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <h3>There are no courses avaible at this time.</h3>
+    {% endif %}
+</body>
+</html>

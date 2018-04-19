@@ -1,0 +1,8 @@
+{% include "courses/header.html" %}
+<form action="/courses/{{course.id}}" method='POST'>
+    {% csrf_token%}
+    Name: <input type="text" name='name' placeholder="{{course.name}}">
+    Description: <textarea name="desc" placeholder="{{course.desc}}"></textarea>
+    <input type="submit" value="Submit">
+</form>
+</body>
